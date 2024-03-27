@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nectar/signIn.dart';
+
+import '../UI_registration/signUp.dart';
+
+
 
 class Onbording extends StatefulWidget {
   const Onbording({Key? key}) : super(key: key);
@@ -13,12 +16,13 @@ class _OnbordingState extends State<Onbording> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Column(
         children: [
           Stack(
             children: [
               Image.asset(
-                "assets/man.png",fit: BoxFit.cover,
+                "assets/man.png",fit: BoxFit.fitHeight,
               ),
               Positioned(
                 top: 350.h,
@@ -52,7 +56,7 @@ class _OnbordingState extends State<Onbording> {
 
                         GestureDetector(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=> SignIn()));
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> SignUp()));
                           },
                           child: Padding(
                             padding:  EdgeInsets.all(30.0.w),

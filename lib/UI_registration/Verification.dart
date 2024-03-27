@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nectar/Location.dart';
+
+import '../UI/Location.dart';
+
 
 class Verification extends StatefulWidget {
   const Verification({Key? key}) : super(key: key);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nectar/Beverages.dart';
-import 'package:nectar/eggs.dart';
+
+import 'Beverages.dart';
+import 'eggs.dart';
+
 
 class Explore extends StatefulWidget {
   const Explore({Key? key}) : super(key: key);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nectar/UI/BottomNavBar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'onbording.dart';
+import '../UI/onbording.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -13,8 +15,13 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
  @override
   void initState() {
-   Future.delayed( Duration(seconds: 3),(){
-     Navigator.of(context).push(MaterialPageRoute(builder: (_)=>  Onbording()));
+    super.initState();
+   Future.delayed( const Duration(seconds: 3),()async{
+     final SharedPreferences prefs = await SharedPreferences.getInstance();
+     if(prefs.containsKey("Token")){
+       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>  BottomNavBar()));
+     }else{
+     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>  Onbording()));}
    });
     // TODO: implement initState
 
@@ -22,7 +29,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff53B175),
+      backgroundColor: const Color(0xff53B175),
       body: Column(mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -44,7 +51,7 @@ class _SplashState extends State<Splash> {
                     ),
                   ),
                   Text(
-                    'online groceriet',
+                    'online groceries',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,

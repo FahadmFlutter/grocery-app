@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nectar/filters.dart';
+
+import 'filters.dart';
 
 class Beverages extends StatefulWidget {
   const Beverages({Key? key}) : super(key: key);
@@ -8,7 +9,6 @@ class Beverages extends StatefulWidget {
   @override
   State<Beverages> createState() => _BeveragesState();
 }
-
 
 List<String> text = [
   "Diet Coke",
@@ -43,8 +43,6 @@ List<String> price = [
   "\$5.99",
 ];
 
-
-
 class _BeveragesState extends State<Beverages> {
   @override
   Widget build(BuildContext context) {
@@ -53,14 +51,16 @@ class _BeveragesState extends State<Beverages> {
         child: Column(
           children: [
             Padding(
-              padding:  EdgeInsets.all(20.0.w),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: EdgeInsets.all(20.0.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: Container(child: Icon(Icons.arrow_back_ios_new_rounded))),
+                      child: Container(
+                          child: Icon(Icons.arrow_back_ios_new_rounded))),
                   Text(
                     'Beverages',
                     style: TextStyle(
@@ -71,35 +71,41 @@ class _BeveragesState extends State<Beverages> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> filters()));
-                    },
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) => filters()));
+                      },
                       child: Icon(Icons.tune_rounded)),
                 ],
               ),
             ),
             Expanded(
               child: Padding(
-                padding:  EdgeInsets.all(5.0.w),
+                padding: EdgeInsets.all(5.0.w),
                 child: GridView.count(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 10.0,childAspectRatio: 170.w/230.h,
+                    mainAxisSpacing: 10.0,
+                    childAspectRatio: 170.w / 230.h,
                     shrinkWrap: true,
-                    children:
-                    List.generate(img.length, (index){
-                      return  Container(
-
+                    children: List.generate(img.length, (index) {
+                      return Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.r),
-                            border: Border.all(width: 1.w, color: Colors.grey,)),
+                            border: Border.all(
+                              width: 1.w,
+                              color: Colors.grey,
+                            )),
                         child: Padding(
-                          padding:  EdgeInsets.all(10.0.w),
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          padding: EdgeInsets.all(10.0.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Center(child: Image.asset(img[index], height: 70.h)),
-                              Column(crossAxisAlignment: CrossAxisAlignment.start,
+                              Center(
+                                  child: Image.asset(img[index], height: 70.h)),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     text[index],
@@ -121,7 +127,9 @@ class _BeveragesState extends State<Beverages> {
                                   ),
                                 ],
                               ),
-                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     price[index],
@@ -139,10 +147,14 @@ class _BeveragesState extends State<Beverages> {
                                     decoration: ShapeDecoration(
                                       color: Color(0xFF53B175),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(17.r),
+                                        borderRadius:
+                                            BorderRadius.circular(17.r),
                                       ),
                                     ),
-                                    child: Icon(Icons.add_rounded,color: Colors.white,),
+                                    child: Icon(
+                                      Icons.add_rounded,
+                                      color: Colors.white,
+                                    ),
                                   )
                                 ],
                               )
@@ -150,9 +162,7 @@ class _BeveragesState extends State<Beverages> {
                           ),
                         ),
                       );
-                    })
-
-                ),
+                    })),
               ),
             )
           ],

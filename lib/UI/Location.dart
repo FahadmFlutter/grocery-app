@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nectar/Login.dart';
+
+import '../UI_registration/Login.dart';
 
 class Location extends StatefulWidget {
   const Location({Key? key}) : super(key: key);
