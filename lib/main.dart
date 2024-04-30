@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/BloC/Add_to_cart/addtocart_bloc.dart';
 import 'package:nectar/BloC/Banner/banner_bloc.dart';
 import 'package:nectar/BloC/Cart/cart_bloc.dart';
+import 'package:nectar/BloC/Delete/delete_bloc.dart';
 import 'package:nectar/BloC/Get_All_Products/get_all_products_bloc.dart';
 import 'package:nectar/BloC/Login/login_bloc.dart';
 import 'package:nectar/BloC/Product/product_bloc.dart';
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => CartBloc(),
+            ),
+            BlocProvider(
+              create: (context) => DeleteBloc(),
             ),
           ],
           child: MaterialApp(

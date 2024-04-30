@@ -79,8 +79,7 @@ class _ProductPageState extends State<ProductPage> {
                 );
               }
               if (state is ProductBlocLoaded) {
-                productData =
-                    BlocProvider.of<ProductBloc>(context).productModel;
+                productData = BlocProvider.of<ProductBloc>(context).productModel;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

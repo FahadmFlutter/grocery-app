@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/BloC/Cart/cart_bloc.dart';
+import 'package:nectar/BloC/Delete/delete_bloc.dart';
 import 'package:nectar/Model_Classes/CartModel.dart';
 
 import 'order.dart';
@@ -15,22 +16,15 @@ class MyCart extends StatefulWidget {
   @override
   State<MyCart> createState() => _MyCartState();
 }
- late CartModel cartData;
 
-
-
+late CartModel cartData;
 
 class _MyCartState extends State<MyCart> {
-
-
   @override
   void initState() {
     BlocProvider.of<CartBloc>(context).add(FetchCart());
     super.initState();
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,118 +61,172 @@ class _MyCartState extends State<MyCart> {
                     cartData = BlocProvider.of<CartBloc>(context).cartModel;
                     print(cartData.data![0].cartProducts!.length);
                     return SizedBox(
-                      height:100*cartData.data![0].cartProducts!.length.toDouble(),
+                      height: 100 *
+                          cartData.data![0].cartProducts!.length.toDouble(),
                       child: ListView.separated(
-                          itemCount: cartData.data![0].cartProducts!.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext, int index) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                          image: NetworkImage(cartData.data![0].cartProducts![index].product!.image3![0].url.toString()),
-                                          fit: BoxFit.fitHeight,
-                                        ),
+                        itemCount: cartData.data![0].cartProducts!.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext, int index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 80,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: NetworkImage(cartData
+                                            .data![0]
+                                            .cartProducts![index]
+                                            .product!
+                                            .image3![0]
+                                            .url
+                                            .toString()),
+                                        fit: BoxFit.fitHeight,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          cartData
-                                              .data![0]
-                                              .cartProducts![index]
-                                              .product!
-                                              .name
-                                              .toString(),
-                                          style:  TextStyle(
-                                              fontSize: 17,
-                                              color: Colors.grey[700],
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(height: 10,),
-                                        Text(
-                                          '₹${cartData.data![0].cartProducts![index].price}',
-                                          style:  TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.green[400],
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                       GestureDetector(
-                                         onTap:(){},
-                                         child: Icon(
-                                          Icons.close,
-                                          color: Colors.red,
-                                                                               ),
-                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 18, left: 5),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 3),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey),
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Row(
-                                            children: [
-                                              const Text(
-                                                "-   ",
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                cartData.data![0].cartProducts![index].quantity.toString(),
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.grey[600]),
-                                              ),
-                                              const Text(
-                                                "   +",
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.grey),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                      Text(
+                                        cartData.data![0].cartProducts![index]
+                                            .product!.name
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.grey[700],
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        '₹${cartData.data![0].cartProducts![index].price}',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.green[400],
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    BlocListener<DeleteBloc, DeleteState>(
+                                      listener: (context, state) {
+                                        if (state is DeleteBlocLoaded) { BlocProvider.of<CartBloc>(context).add(FetchCart());
+                                          print('removing');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Center(
+                                                child: Text(
+                                                  'Removing from cart',
+                                                  style: TextStyle(
+                                                      color: Colors.grey[700]),
+                                                ),
+                                              ),
+                                              backgroundColor: Colors.grey[300],
+                                            ),
+                                          );
+                                        } else if (state is DeleteBlocError) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Something went wrong !!',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                              backgroundColor: Colors.red[50],
+                                            ),
+                                          );
+                                        }
+                                        // TODO: implement listener
+                                      },
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          BlocProvider.of<DeleteBloc>(context)
+                                              .add(FetchDelete(
+                                                  cartId: cartData.data![0]
+                                                      .cartProducts![index].id
+                                                      .toString()));
+                                        },
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18, left: 5),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 3),
+                                        decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.grey),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Row(
+                                          children: [
+                                            const Text(
+                                              "-   ",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.grey),
+                                            ),
+                                            Text(
+                                              cartData.data![0]
+                                                  .cartProducts![index].quantity
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.grey[600]),
+                                            ),
+                                            const Text(
+                                              "   +",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            );
-                          }, separatorBuilder: (BuildContext context, int index) { return Divider(); },),
+                              ),
+                            ],
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Divider();
+                        },
+                      ),
                     );
                   } else {
-                    return Text('No data available');
+                    return const Center(child: CircularProgressIndicator(
+                      color: Colors.green,
+                    ));
                   }
                 },
               ),
@@ -200,8 +248,7 @@ class _MyCartState extends State<MyCart> {
                       Padding(
                         padding: EdgeInsets.all(30.0.w),
                         child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Checkout',
@@ -223,8 +270,7 @@ class _MyCartState extends State<MyCart> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 30.w, vertical: 10.h),
                         child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Delivery',
@@ -257,8 +303,7 @@ class _MyCartState extends State<MyCart> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 30.w, vertical: 10.h),
                         child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Payment',
@@ -284,8 +329,7 @@ class _MyCartState extends State<MyCart> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 30.w, vertical: 10),
                         child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Promo Code',
@@ -313,13 +357,12 @@ class _MyCartState extends State<MyCart> {
                           ],
                         ),
                       ),
-                      Divider(),
+                      const Divider(),
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 30.w, vertical: 10.h),
                         child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Total Cost',
@@ -341,7 +384,7 @@ class _MyCartState extends State<MyCart> {
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                Icon(Icons.arrow_forward_ios_rounded),
+                                const Icon(Icons.arrow_forward_ios_rounded),
                               ],
                             )
                           ],
@@ -349,7 +392,7 @@ class _MyCartState extends State<MyCart> {
                       ),
                       Padding(
                         padding: EdgeInsets.all(30.0.w),
-                        child: Text(
+                        child: const Text(
                             "By placing an order you agree to our\nTerms And Conditions"),
                       ),
                       GestureDetector(
@@ -357,154 +400,132 @@ class _MyCartState extends State<MyCart> {
                           showDialog(
                               context: context,
                               builder: (_) => AlertDialog(
-                                insetPadding: EdgeInsets.only(
-                                  left: 10.w,
-                                  right: 10.w,
-                                  top: 80.h,
-                                ),
-                                backgroundColor: Colors.transparent,
-                                content: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                      BorderRadius.circular(
-                                          20)),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10.0.w),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 250.w),
-                                          child: GestureDetector(
+                                    insetPadding: EdgeInsets.only(
+                                      left: 10.w,
+                                      right: 10.w,
+                                      top: 80.h,
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                    content: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10.0.w),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 250.w),
+                                              child: GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Icon(Icons.close)),
+                                            ),
+                                            Image.asset(
+                                              'assets/errorimg.png',
+                                              height: 200.h,
+                                              width: 200.w,
+                                            ),
+                                            SizedBox(
+                                              height: 30.h,
+                                            ),
+                                            Text(
+                                              'Oops! Order Failed',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: const Color(0xFF181725),
+                                                fontSize: 26.sp,
+                                                fontFamily: 'Gilroy',
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15.h,
+                                            ),
+                                            const Text(
+                                              "Something went tembly wrong.",
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            SizedBox(
+                                              height: 40.h,
+                                            ),
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(_).pop();
+                                                },
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (_) =>
+                                                                Order()));
+                                                  },
+                                                  child: Container(
+                                                    width: 313.w,
+                                                    height: 67.h,
+                                                    decoration: ShapeDecoration(
+                                                      color: Color(0xFF53B175),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(19.r),
+                                                      ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Please Try Again',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 18.r,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )),
+                                            GestureDetector(
                                               onTap: () {
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              child: Icon(
-                                                  Icons.close)),
-                                        ),
-                                        Image.asset(
-                                          'assets/errorimg.png',
-                                          height: 200.h,
-                                          width: 200.w,
-                                        ),
-                                        SizedBox(
-                                          height: 30.h,
-                                        ),
-                                        Text(
-                                          'Oops! Order Failed',
-                                          textAlign:
-                                          TextAlign.center,
-                                          style: TextStyle(
-                                            color:
-                                            Color(0xFF181725),
-                                            fontSize: 26.sp,
-                                            fontFamily: 'Gilroy',
-                                            fontWeight:
-                                            FontWeight.w600,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15.h,
-                                        ),
-                                        Text(
-                                          "Something went tembly wrong.",
-                                          style: TextStyle(
-                                              color: Colors.grey),
-                                          textAlign:
-                                          TextAlign.center,
-                                        ),
-                                        SizedBox(
-                                          height: 40.h,
-                                        ),
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.of(_).pop();
-                                            },
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                Navigator.of(
-                                                    context)
-                                                    .push(MaterialPageRoute(
-                                                    builder: (_) =>
-                                                        Order()));
+                                                Navigator.pop(context);
                                               },
                                               child: Container(
                                                 width: 313.w,
                                                 height: 67.h,
-                                                decoration:
-                                                ShapeDecoration(
-                                                  color: Color(
-                                                      0xFF53B175),
-                                                  shape:
-                                                  RoundedRectangleBorder(
+                                                decoration: ShapeDecoration(
+                                                  shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        19.r),
+                                                        BorderRadius.circular(
+                                                            19.r),
                                                   ),
                                                 ),
                                                 child: Center(
                                                   child: Text(
-                                                    'Please Try Again',
-                                                    textAlign:
-                                                    TextAlign
-                                                        .center,
-                                                    style:
-                                                    TextStyle(
-                                                      color: Colors
-                                                          .white,
-                                                      fontSize:
-                                                      18.r,
+                                                    'Back to home',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 18.sp,
                                                       fontWeight:
-                                                      FontWeight
-                                                          .w600,
+                                                          FontWeight.w600,
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            )),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Container(
-                                            width: 313.w,
-                                            height: 67.h,
-                                            decoration:
-                                            ShapeDecoration(
-                                              shape:
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius
-                                                    .circular(
-                                                    19.r),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'Back to home',
-                                                textAlign: TextAlign
-                                                    .center,
-                                                style: TextStyle(
-                                                  color:
-                                                  Colors.black,
-                                                  fontSize: 18.sp,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .w600,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                actions: [],
-                              ));
+                                    actions: [],
+                                  ));
                         },
                         child: Center(
                           child: Container(
@@ -513,8 +534,7 @@ class _MyCartState extends State<MyCart> {
                             decoration: ShapeDecoration(
                               color: Color(0xFF53B175),
                               shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(19.r),
+                                borderRadius: BorderRadius.circular(19.r),
                               ),
                             ),
                             child: Center(
@@ -566,7 +586,7 @@ class _MyCartState extends State<MyCart> {
                   child: Center(
                     child: Text(
                       '₹ '
-                          // +cartData.data![0].totalPrice.toString()
+                      // +cartData.data![0].totalPrice.toString()
                       ,
                       style: TextStyle(
                         color: Color(0xFFFCFCFC),
